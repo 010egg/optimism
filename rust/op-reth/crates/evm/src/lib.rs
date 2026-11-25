@@ -214,9 +214,12 @@ pub fn validate_post_exec_attributes(
     })
 }
 
-/// UPSTREAM-MIRROR(copy): reth@op-v2.7.0-2 `reth_evm_ethereum::EthEvmConfig`
+/// UPSTREAM-MIRROR(copy): reth@rev:fc4e457 `reth_evm_ethereum::EthEvmConfig`
 ///
 /// Mirrors upstream `ConfigureEvm` plumbing with OP environments and execution context.
+/// Upstream's prewarm-result hooks (`reuses_prewarm_results`, `prewarm_tx_result`,
+/// `speculative_next_evm_env`) stay at their disabled defaults: OP execution adds per-transaction
+/// fee and post-exec work that a speculative prewarm result does not capture.
 impl<EvmF> ConfigureEvm for OpEvmConfig<EvmF>
 where
     EvmF: EvmFactory<
@@ -302,7 +305,7 @@ where
     }
 }
 
-/// UPSTREAM-MIRROR(copy): reth@op-v2.7.0-2 `reth_evm_ethereum::EthEvmConfig`
+/// UPSTREAM-MIRROR(copy): reth@rev:fc4e457 `reth_evm_ethereum::EthEvmConfig`
 ///
 /// Mirrors upstream payload-to-EVM configuration with OP payload and fork semantics.
 /// `tx_iterator_for_payload` recovers senders directly; upstream routes the same recovery through
